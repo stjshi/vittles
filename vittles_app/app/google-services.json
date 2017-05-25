@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "348202366588",
+    "firebase_url": "https://vittles-9bbb3.firebaseio.com",
+    "project_id": "vittles-9bbb3",
+    "storage_bucket": "vittles-9bbb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348202366588:android:5c1fe5cac0f86e62",
+        "android_client_info": {
+          "package_name": "com.illuminous.vittles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348202366588-vbbsl1eaq6t2u2jfsud79i6f1ng96gif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5EYhgUgPxaUU8vm9RGykS5amr4uhCoqY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
