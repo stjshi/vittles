@@ -18,10 +18,11 @@ import butterknife.InjectView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-private FirebaseAuth mAuth;
-private FirebaseAuth.AuthStateListener mAuthListener;
+
 
 public class LoginActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
