@@ -21,6 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 private FirebaseAuth mAuth;
 private FirebaseAuth.AuthStateListener mAuthListener;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
