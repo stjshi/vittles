@@ -1,43 +1,59 @@
 package com.illuminous.vittles;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.os.StrictMode;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.widget.TextView;
 
+import com.yelp.fusion.client.connection.YelpFusionApi;
+import com.yelp.fusion.client.connection.YelpFusionApiFactory;
+import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.SearchResponse;
 
-public class MainActivity extends ActionBarActivity {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.R.attr.y;
+import static android.media.CamcorderProfile.get;
+
+public class MainActivity extends AppCompatActivity {
+    YelpFusionApiFactory apiFactory;
+    TextView minfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
+        minfo = (TextView) findViewById(R.id.business_display);
         setContentView(R.layout.activity_main);
+            apiFactory = new YelpFusionApiFactory();
+            try {
+                Map<String, String> params = new HashMap<>();
+                YelpFusionApi yelpFusionApi = apiFactory.createAPI("0x2eOuAzs_QARDOGy6UFpw", "lCQaEU3PrlJcCkWS3HS4QHREdRZSY9I6TleyVwFhwV3tf5kW154TSR3CYZSF2qVI");
+                params.put("term", "mexican food");
+                params.put("latitude", "36.999848");
+                params.put("longitude", "-122.062926");
+                Call<SearchResponse> call= yelpFusionApi.getBusinessSearch(params);
+                SearchResponse searchResponse = call.execute().body();
+
+                ArrayList<Business> businesses = searchResponse.getBusinesses();
+                for (Business business : businesses) {
+                    String businessName = business.getName();
+                    Log.v("business name", businessName);
+                }
 
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        return super.onOptionsItemSelected(item);
     }
 }
